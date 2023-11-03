@@ -11,7 +11,7 @@ async def receive_messages(websocket):
 
 def send_messages(websocket):
     while True:
-        message = input("Enter message: ")
+        message = input()
         asyncio.run(websocket.send(message))  # Use asyncio.run to send the message
 
 
