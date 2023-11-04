@@ -8,8 +8,8 @@
 
 <body>
   <div id="container">
-    <input type="text" id="chat-box" readonly>
-    <input type="text" id="user-input" onkeydown="checkEnter(event)">
+    <textarea id="chat-box" readonly></textarea>
+    <input type="text" id="user-input" onkeydown="sendMessage(event)">
   </div>
   <script src="client.js"></script>
 </body>

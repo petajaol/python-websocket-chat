@@ -1,25 +1,41 @@
-const chatArea = document.getElementById("chatArea");
+const chatBox = document.getElementById("chat-box");
 
-function connectWebSocket() {
-  const ws = new WebSocket("ws://localhost:8000");
+const ws = new WebSocket("ws://localhost:8000");
 
-  ws.addEventListener("message", (event) => {
-    chatArea.innerHTML += `${event.data}<br>`;
-  });
+window.addEventListener("beforeunload", () => {
+  chatBox.value = "";
+});
 
-  return ws;
+ws.addEventListener("message", (event) => {
+  handleIncomingMessages(event);
+});
+
+function handleIncomingMessages(event) {
+  try {
+    parsedData = JSON.parse(event.data);
+    if (Array.isArray(parsedData)) {
+      parsedData.forEach((message) => {
+        chatBox.value += "\n" + parseMessage(message);
+      });
+    } else {
+      chatBox.value += "\n" + parseMessage(parsedData);
+    }
+  } catch (error) {
+    chatBox.value += "\n" + event.data;
+  }
+  chatBox.scrollTop = chatBox.scrollHeight
 }
 
-const ws = connectWebSocket();
+function parseMessage(message) {
+  return `[${message.timestamp}] ${message.user_name}: ${message.message} `
+}
 
-function checkEnter(event) {
+function sendMessage(event) {
   if (event.key === "Enter") {
     event.preventDefault();
-    submitInput();
+    const userInput = document.getElementById("user-input").value;
+    ws.send(userInput);
+    document.getElementById("user-input").value = "";
   }
-}
 
-function submitInput() {
-  const userInput = document.getElementById("user-input").value;
-  ws.send(userInput);
 }
