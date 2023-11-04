@@ -7,9 +7,12 @@
 </head>
 
 <body>
-  <div id="container">
-    <textarea id="chat-box" readonly></textarea>
-    <input type="text" id="user-input" onkeydown="sendMessage(event)">
+  <div class="container">
+    <div class="chat-area">
+      <textarea id="chat-box" readonly></textarea>
+      <textarea id="user-list" readonly></textarea>
+    </div>
+    <input type="text" id="user-input" onkeydown="sendMessage(event)" autofocus>
   </div>
   <script src="client.js"></script>
 </body>
