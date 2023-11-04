@@ -79,6 +79,8 @@ async def ask_user_name(client):
         user_name = await client.recv()
         if not user_name:
             await client.send("Name cannot be empty. Please enter a name.")
+        elif len(user_name) > 10:
+            await client.send("Name cannot be longer than 10 characters.")
         elif user_name in connected_clients:
             await client.send("User name is already taken. Choose another user name.")
         else:
