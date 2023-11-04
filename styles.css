@@ -3,6 +3,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 #container {
@@ -17,8 +18,17 @@ textarea {
   height: 300px;
   width: 50%;
   margin-bottom: 20px;
+  background-color: black;
+  border-color: green;
+  color: green;
+  outline: none;
+  resize: none;
 }
 
 input {
   width: 50%;
+  background-color: black;
+  border-color: green;
+  color: green;
+  outline: none;
 }
